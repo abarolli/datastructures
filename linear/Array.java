@@ -1,5 +1,6 @@
 package linear;
 
+
 public class Array {
     private int[] nums;
     private int currentIndex;
@@ -36,6 +37,15 @@ public class Array {
         }
 
         return -1;
+    }
+
+    public int[] toArray() {
+        int[] arr = new int[currentIndex];
+        for (int i = 0; i < currentIndex; ++i) {
+            arr[i] = nums[i];
+        }
+
+        return arr;
     }
 
     public void print() {

@@ -1,46 +1,80 @@
 package linear;
 
-import linear.components.Node;
+import java.util.NoSuchElementException;
 
 public class LinkedList<T> {
+    
+    private class Node {
+        private T data;
+        private Node nextNode;
 
-    private Node<T> head;
-    private Node<T> tail;
-
-    public LinkedList(T head) {
-        setHead(head);
-        setTail(this.head);
-    }
-
-    public void push(T nextItem) {
-        var nextNode = new Node<T>(nextItem);
-        this.tail.setNextNode(nextNode);
-        setTail(nextNode);
-    }
-
-    public void printList() {
-        var currentNode = head;
-        do {
-            System.out.println(currentNode);
-            currentNode = currentNode.getNextNode();
+        public Node(T data) {
+            this.data = data;
         }
-        while (currentNode != head);
     }
 
-    private void setTail(Node<T> tail) {
-        this.tail = tail;
-        this.tail.setNextNode(head);
+    private Node head;
+    private Node tail;
+
+    public void addLast(T item) {
+        var node = new Node(item);
+        
+        if (isEmpty())
+            initList(node);
+        else {
+            tail.nextNode = node;
+            tail = node;
+        }
     }
 
-    public Node<T> getTail() {
-        return tail;
+    public void addFirst(T item) {
+        var node = new Node(item);
+
+        if (isEmpty())
+            initList(node);
+        else {
+            node.nextNode = head;
+            head = node;
+        }
     }
 
-    public void setHead(T head) {
-        this.head = new Node<T>(head);
+    public int indexOf(T item) {
+
+        Node currentItem = head;
+        int count = 0;
+        while (currentItem != null) {
+            if (currentItem.data.equals(item)) return count;
+            currentItem = currentItem.nextNode;
+            ++count;
+        }
+
+        return -1;
     }
 
-    public Node<T> getHead() {
-        return head;
+    public boolean contains(T item) {
+        return indexOf(item) != -1;
+    }
+
+    public void removeFirst() {
+
+        if (isEmpty())
+            throw new NoSuchElementException("Can't remove from empty list.");
+
+        if (head == tail) {
+            head = tail = null;
+            return;
+        } 
+
+        Node currentHead = head;
+        head = currentHead.nextNode;
+        currentHead.nextNode = null;
+    }
+
+    private boolean isEmpty() {
+        return head == null;
+    }
+
+    private void initList(Node node) {
+        head = tail = node;
     }
 }

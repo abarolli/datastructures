@@ -1,4 +1,3 @@
 linear\Array.java
 linear\LinkedList.java
-linear\components\Node.java
 main\Main.java

@@ -1,21 +1,30 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import linear.Array;
+import linear.LinkedList;
 
 public class Main {
     public static void main(String[] args) {
-
-        Array arr = new Array(5);
-
-        arr.insert(2);
-        arr.insert(40);
-        arr.insert(54);
-
         
+        var list = new LinkedList<Integer>();
+        
+        list.addLast(10);
+        list.addLast(20);
+        list.addFirst(3445);
+        list.addLast(30);
 
+        list.addFirst(212);
+
+        System.out.println(list.indexOf(3445));
+        System.out.println(list.contains(3445));
+
+        System.out.println(list.contains(30));
+        System.out.println(list.contains(11));
+    }
+
+    public static void printDetailsOfArray(LinkedList<Integer> l) {
+        // System.out.println(l);
+        // System.out.println(l.getHead());
+        // System.out.println(l.getTail());
     }
 
 }
